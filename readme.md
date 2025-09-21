@@ -10,7 +10,7 @@ MQTT Publisher – Örnek batarya verilerini MQTT broker’ına gönderir.
 
 Projede Docker Compose kullanılarak üç servis aynı anda çalıştırılabilir.
 
-🚀 Özellikler
+Özellikler
 
 Gerçek zamanlı SOC tahmini
 
