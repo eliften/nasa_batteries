@@ -1,0 +1,48 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "112233"
+      POSTGRES_DB: batteries
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  api_server:
+    build: .
+    container_name: api_server
+    ports:
+      - "5000:5000"
+    command: python api/app.py
+    depends_on:
+      - postgres
+    volumes:
+      - ./models:/app/models
+
+  dash_app:
+    build: .
+    container_name: dash_app
+    ports:
+      - "8010:8010"
+    command: python app.py
+    depends_on:
+      - api_server
+      - postgres
+    volumes:
+      - ./.env:/app/.env
+
+  mqtt_publisher:
+    build: .
+    container_name: mqtt_publisher
+    command: python api/mqtt_publisher.py
+    depends_on:
+      - api_server
+    volumes:
+      - ./.env:/app/.env
+
+volumes:
+  pgdata:

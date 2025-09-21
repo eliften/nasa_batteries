@@ -1,0 +1,14 @@
+scikit-learn
+dash
+dash-bootstrap-components
+flask
+flask-session
+paho-mqtt
+pandas
+numpy
+scipy
+matplotlib
+psycopg2-binary
+torch==2.8.0+cpu
+python-dotenv
+
